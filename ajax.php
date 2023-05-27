@@ -81,5 +81,10 @@ if($action == 'get_report'){
 	if($get)
 		echo $get;
 }
+if($action == 'get_object_data'){
+	$get = $crud->get_object_data();
+	if($get)
+		echo $get;
+}
 ob_end_flush();
 ?>

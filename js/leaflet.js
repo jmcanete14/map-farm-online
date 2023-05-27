@@ -7,36 +7,60 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-// Example array of coordinates
-const coordinates = [
-    [14.19872008522572, 120.88206863803913],
-    [14.199479362706317, 120.87910747950812],
-    [14.196057393395686, 120.8821759263917],
-    [14.196743871628177, 120.87965465010625],
-    // Add more coordinates here...
-  ];
+
+
+// do something else with the selected value
+function fetchData() {
+    $.ajax({
+        url:'ajax.php?action=get_object_data',
+        method:'POST',
+        success:function(resp){
+            arr = get_objects_data(resp); 
+            render_to_map(arr);
+        }
+        
+    });
+}
+
+function get_objects_data(resp){
+    coordinates = [];
+
+    var responseObject = JSON.parse(resp);
+    var arrayCount = Object.keys(responseObject).length;
+
+    // add the new option element with the value attribute using innerHTML
+    for (var i = 0; i < arrayCount; i++) {
+        
+        coordinates.push([responseObject[i]['latitude'], responseObject[i]['longitude']]);
+        
+    }
+
+    return coordinates
+}
 
 
 
-let marker, circle;
 
 
-//begin
-render_to_map();
+let marker=[], circle=[];
 
-
-function render_to_map(){
+function render_to_map(coordinates){
 
         // remove existing marker and circles;
-        if (marker) {
-            map.removeLayer(marker);
-            map.removeLayer(circle)
+        if (marker.length > 0) {
+            for(i=0; i<marker.length; i++){
+                map.removeLayer(marker[i]);
+                map.removeLayer(circle[i]);
+            }
         }
 
         // Add circles for each coordinate in the array
         coordinates.forEach(coord => {
-            L.marker(coord).addTo(map);
-            L.circle(coord, { radius: 50 }).addTo(map); // Adjust the radius as needed
+            mrk = L.marker(coord).addTo(map);
+            ckl = L.circle(coord, { radius: 50 }).addTo(map); // Adjust the radius as needed
+
+            marker.push(mrk);
+            circle.push(ckl);
         });
 
         
@@ -46,16 +70,14 @@ function render_to_map(){
 
         // Fit the map to the bounds
         //map.fitBounds(bounds);
+
+        
 }
 
 
 
-function error(err){
-     if (err.code === 1){
-        alert("Please allow geolocation access.");
-     }
-     else{
-        alert("Cannot get location.");
-     }
+// Call fetchData function immediately
+fetchData();
 
-}
+// Re-run fetchData function every 5 seconds (5000 milliseconds)
+setInterval(fetchData, 5000);

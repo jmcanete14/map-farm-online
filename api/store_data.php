@@ -73,7 +73,7 @@ $re = array();
 try{
 
   // Check if the request method is POST
-  if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Capture the JSON Post
     $json_data = file_get_contents('php://input'); // Read raw POST data

@@ -349,4 +349,21 @@ Class Action {
 		return json_encode($data);
 
 	}
+
+	function get_object_data(){
+		$data = array();
+		$get = $this->db->query("SELECT s.* from sensordata s
+									JOIN(
+									SELECT object_id, max(id) as id
+									from sensordata group by object_id
+									) 
+								j on j.id = s.id");
+								
+		while($row= $get->fetch_assoc()){
+			$row['datetime_recorded'] = date("M d, Y",strtotime($row['date_created']));
+			$row['pulse_rate'] = number_format($row['pulse_rate'],2);
+			$data[]=$row;
+		}
+		return json_encode($data);
+	}
 }
