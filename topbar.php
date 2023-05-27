@@ -8,7 +8,7 @@
       </li>
     <?php endif; ?>
       <li>
-        <a class="nav-link text-white"  href="./" role="button"><large><b>WMS</b></large></a>
+        <a class="nav-link text-white"  href="./" role="button"><large><b>GG System</b></large></a>
       </li>
     </ul>
 

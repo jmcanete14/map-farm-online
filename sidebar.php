@@ -30,16 +30,11 @@
           <li class="nav-item">
                 <a href="./index.php?page=logs" class="nav-link nav-ls">
                   <i class="fas fa-tasks nav-icon"></i>
-                  <p>Sensor Logs</p>
+                  <p>Logs</p>
                 </a>
           </li>
           
-           <li class="nav-item">
-                <a href="./index.php?page=feedback" class="nav-link nav->feedback">
-                  <i class="fas fa-th-list nav-icon"></i>
-                  <p>Feedback</p>
-                </a>
-          </li>
+           
           
           <?php if($_SESSION['login_type'] == 1): ?>
           <li class="nav-item">

@@ -124,7 +124,7 @@
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2022 <a href="https://www.mvsantiago.com/">M.V. Santiago Medical Center.</a>.</strong>
+    <strong>Copyright &copy; 2023 <a href="#">Goat Geofencing System Inc.</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b><?php echo $_SESSION['system']['name'] ?></b>

@@ -33,28 +33,23 @@ if($_SESSION['login_type'] != 1)
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<meta http-equiv="reload">-->
-    <meta http-equiv="refresh" content="5">
+   
     <link rel="stylesheet" type="text/css" href="style_home.css">
-    <style>
-    /*  @media (min-width: 1280px)  {
-        #imgMap {
-          height: 30%!important;
-        }
-      }
 
-      @media (min-width: 700px)  {
-        #imgMap {
-          height: 40%!important;
-        }
-      }
+    <!-- Leaflet's CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
 
-      @media (min-width: 400px)  {
-        #imgMap {
-          height: 20%!important;
-        }
-      }*/
-    </style>
+    <!-- Leaflet's Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+
+    
   </head>
  <body>
     <!-- <div class="row"> -->
@@ -66,74 +61,16 @@ if($_SESSION['login_type'] != 1)
           <div class="card-body p-0">
             
               <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-7">
-                    <div class="">
-                      <img src="image/map.jpeg?v=<?php echo time(); ?>" id="imgMap" class="img-fluid img-thumbnail" style="max-width: 100%;"> 
-                    </div>
-                  </div>
-                  <div class="col-md-5">
-                    <!-- <div id="chart"> -->
-                     <table width="100%">
-                      <tr>
-                        <th align="center">Room</th>
-                        <th align="center">Status</th>
-                      </tr>
-                      <tr>
-                        <td>ER</td>
-                        <?php
-
-                        include('db_connect.php');
-
-
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password,$db);
-
-                        // Check connection
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        }
-
-                        //error_reporting(0);
-
-                        //$conn = mysqli_connect();
-
-                        $sql = "SELECT * FROM sensrdata WHERE id = ( SELECT MAX(id) FROM sensrdata )";
-
-                        // $result = $conn->query($sql);
-
-                        // print_r($result);
-
-                        // $query = "SELECT max ('wlevel') FROM 'test'"; 
-
-                        // $query_result = mysqli_query($conn, $query);
-
-                        if ($result = $conn->query($sql)) {
-                           while ($row = $result->fetch_assoc()) {
-                               $display = $row['waste_level'];
-// var_dump();
-                               if ($display <= "10") {
-                                 echo '<td style="background-color:red;color:white;">Full</td>';
-                               } elseif ($display >= "11" && $display <= "30") {
-                                 echo '<td style="background-color:green;color:white;">Not full</td>';
-                               } else {
-                                 echo '<td style="background-color:yellow;color:black;">Maintaining</td>';
-                               }
-                            }
-                            $result->free();
-                        }
-
-                        ?>
-                      </tr>
-                     </table>
-                    <!-- </div> -->
-                  </div>
-                </div>
+                <!-- Leaflet's Map-->
+                <div id="map"></div>
               </div>
           </div>
         </div>
       </div>
     <!-- </div> -->
 </body>
+
+<script type="text/javascript" src="js/leaflet.js?v=<?php echo time();?>"></script>
+
 </html>
 

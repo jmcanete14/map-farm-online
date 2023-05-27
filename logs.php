@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!--<meta http-equiv="reload"> -->
-	<meta http-equiv="refresh" content="5">
+	
 	<link rel="stylesheet" type="text/css" href="style_logs.css">
 
 	<title> Sensor Data </title>
@@ -27,23 +26,20 @@
     	die("Connection Failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT `id`, `location`, `waste_level`, `Date`, `Time` FROM `sensrdata` WHERE 1 ORDER BY 'id' DESC"; /*select items to display from the database table*/
+    $sql = "SELECT id, `object_id`, `latitude`, `longitude`, `pulse_rate`, `battery_level`, datetime_recorded FROM `sensordata` WHERE 1 ORDER BY 'id' DESC limit 20"; /*select items to display from the database table*/
 
     echo '<table cellspacing="5" cellpadding="5">
     	  <tr>
     	  	<th>ID</th>
-    	  	<th>Location</th>
-    	  	<th>Waste Level (cm)</th>
-            <th>Date</th>
-            <th>Time</th>
+          <th>Object</th>
+    	  	<th>Latitude</th>
+          <th>Longitude</th>
+    	  	<th>Pulse Rate</th>
+            <th>Battery Level</th>
+            <th>Date-Time</th>
     	  </tr>';
     if ($result = $conn->query($sql)) {
         while ($row = $result->fetch_assoc()) {
-            $row_id = $row['id'];
-            $row_location = $row['location'];
-            $row_level = $row['waste_level'];
-            $row_reading_Date = $row['Date'];
-            $row_reading_Time = $row['Time']; 
             
             // Uncomment to set timezone to - 1 hour (you can change 1 to any number)
            // $row_reading_time = date("Y-m-d H:i:s", strtotime("$row_reading_time - 1 hours"));
@@ -52,11 +48,13 @@
             //$row_reading_time = date("Y-m-d H:i:s", strtotime("$row_reading_time + 4 hours"));
           
             echo '<tr> 
-                    <td>' . $row_id . '</td> 
-                    <td>' . $row_location . '</td> 
-                    <td>' . $row_level . '</td>
-                    <td>' . $row_reading_Date . '</td>  
-                    <td>' . $row_reading_Time . '</td>    
+                    <td>' . $row['id'] . '</td> 
+                    <td>' . $row['object_id'] . '</td> 
+                    <td>' . $row['latitude'] . '</td>
+                    <td>' . $row['longitude'] . '</td>  
+                    <td>' . $row['pulse_rate'] . '</td>    
+                    <td>' . $row['battery_level'] . '</td> 
+                    <td>' . $row['datetime_recorded'] . '</td> 
                   </tr>';
         }
         $result->free();

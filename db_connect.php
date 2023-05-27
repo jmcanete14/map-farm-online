@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "mvsmcwms_admin_usr";
-$password = "Rjfs,Oh90[~Z";
-$db = "mvsmcwms_project";
+$servername = "sql110.epizy.com";
+$username = "epiz_34295731";
+$password = "218UmD9YdGnp";
+$db = "epiz_34295731_goat_geofencing_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$db);
