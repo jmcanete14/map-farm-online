@@ -1,0 +1,28 @@
+body {
+    background: #f5efe0;
+    box-sizing: border-box;
+    color: #000;
+    letter-spacing: -0.015em;
+    text-align: left;
+}
+
+th {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 15px;
+    background: #4FBDBA;
+    color: #191919;
+    padding: 2px 6px;
+    border-collapse: separate;
+    border: 1px solid #000;
+}
+
+td {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid #DDD;
+}
+
+div chart{
+    float: right;
+}
